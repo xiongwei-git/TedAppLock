@@ -1,14 +1,15 @@
-package com.ted.applock;
+package com.ted.applock.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import com.android.TedFramework.Activity.TActivity;
 import com.android.TedFramework.util.CheckDoubleClick;
 import com.android.TedFramework.util.ToastUtil;
+import com.ted.applock.R;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends TActivity {
     private DrawerLayout mDrawerLayout;
 
     @Override

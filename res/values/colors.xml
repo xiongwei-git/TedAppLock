@@ -4,4 +4,5 @@
     <color name="action_bar_bg">#ff42b865</color>
     <color name="menu_item_bg">#fff1f3f8</color>
     <color name="explore_app_name">#ff202020</color>
+    <color name="action_bar_bg_color">#ff46bb6a</color>
 </resources>

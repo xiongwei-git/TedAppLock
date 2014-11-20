@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--SplashActivity-->
+    <item type="id" name="rl_splash">false</item>
+    <item type="id" name="iconview2">false</item>
+
     <!--MainActivity-->
     <item type="id" name="dl_main_layout_drawer_layout">false</item>
     <!--Main menu-->
