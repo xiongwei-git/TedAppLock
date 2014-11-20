@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">应用锁</string>
+    <string name="menu_text_str_enable">应用锁已启用。</string>
+    <string name="menu_text_str_disable">应用锁已禁用。</string>
+    <string name="menu_app_lock">应用锁</string>
+    <string name="menu_photo_vault">照片保险箱</string>
+    <string name="menu_themes">主题</string>
+    <string name="chameleon">变色龙</string>
+    <string name="explore">发现更多</string>
+    <string name="action_settings">设置</string>
+    <string name="rate_us">为我们评分</string>
+    <string name="about_us">关于</string>
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--MainActivity-->
+    <item type="id" name="dl_main_layout_drawer_layout">false</item>
+    <!--Main menu-->
+    <item type="id" name="rl_menu_item_layout">false</item>
+    <item type="id" name="ll_menu_new">false</item>
+    <item type="id" name="iv_menu_item_leftpic">false</item>
+    <item type="id" name="tv_menu_item_direction">false</item>
+    <item type="id" name="cm_menu_item_applock">false</item>
+    <item type="id" name="cm_menu_item_photo_vault">false</item>
+    <item type="id" name="cm_menu_item_themes">false</item>
+    <item type="id" name="cm_menu_item_disguise">false</item>
+    <item type="id" name="cm_menu_item_explore">false</item>
+    <item type="id" name="cm_menu_item_basicsetting">false</item>
+    <item type="id" name="cm_menu_item_best_evaluation">false</item>
+    <item type="id" name="cm_menu_item_aboutus">false</item>
+    <item type="id" name="menu_text">false</item>
+    <item type="id" name="draw_menu">false</item>
+
+</resources>

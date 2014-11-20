@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ted.applock.view.MenuLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:cmview="http://schemas.android.com/apk/res/com.ted.applock">
+    <FrameLayout android:background="@color/action_bar_bg" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:background="@drawable/menu_bg" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <ImageView android:padding="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/menu_icon" />
+        <TextView android:textSize="16.0sp" android:textColor="@color/white" android:layout_gravity="bottom" android:id="@id/menu_text" android:paddingLeft="16.0dip" android:paddingRight="0.1dp" android:paddingBottom="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/menu_text_str_enable" />
+    </FrameLayout>
+    <ScrollView android:scrollbars="none" android:fadingEdge="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_applock" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:onClick="menuItemOnclick" cmview:icon="@drawable/ic_menu_lock" cmview:title="@string/menu_app_lock" cmview:hasIcon="true" />
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_photo_vault" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:icon="@drawable/ic_menu_photo" cmview:title="@string/menu_photo_vault" cmview:hasIcon="true" />
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_themes" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:icon="@drawable/ic_menu_theme" cmview:title="@string/menu_themes" cmview:hasIcon="true" />
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_disguise" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:icon="@drawable/ic_menu_chameleon" cmview:title="@string/chameleon" cmview:hasIcon="true" />
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_explore" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:icon="@drawable/ic_menu_explore" cmview:title="@string/explore" cmview:hasIcon="true" />
+            <View android:background="#ffdfdfdf" android:layout_width="fill_parent" android:layout_height="2.0px" android:layout_marginTop="8.0dip" android:layout_marginBottom="8.0dip" />
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_basicsetting" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:title="@string/action_settings" cmview:hasIcon="false"/>
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_best_evaluation" android:background="@drawable/menu_item_bg_selector" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:icon="@drawable/ic_menu_star" cmview:title="@string/rate_us" cmview:hasIcon="false"/>
+            <com.ted.applock.view.MenuItemView android:id="@id/cm_menu_item_aboutus" android:background="@drawable/menu_item_bg_selector" android:layout_width="wrap_content" android:layout_height="wrap_content" android:onClick="menuItemOnclick" cmview:title="@string/about_us" cmview:hasIcon="false"/>
+        </LinearLayout>
+    </ScrollView>
+</com.ted.applock.view.MenuLayout>

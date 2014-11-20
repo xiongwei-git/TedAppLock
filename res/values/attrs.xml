@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Main_Menu_Item">
+        <!--if has item icon-->
+        <attr name="hasIcon" format="boolean"/>
+        <attr name="isnew" format="boolean"/>
+        <attr name="icon" format="integer" />
+        <attr name="iconW" format="integer" />
+        <attr name="iconH" format="integer" />
+        <attr name="title" format="string" localization="suggested"/>
+    </declare-styleable>
+</resources>

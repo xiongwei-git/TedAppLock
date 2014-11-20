@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffffff</color>
+    <color name="action_bar_bg">#ff42b865</color>
+    <color name="menu_item_bg">#fff1f3f8</color>
+    <color name="explore_app_name">#ff202020</color>
+</resources>

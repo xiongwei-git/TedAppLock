@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="@dimen/menu_item_height"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/rl_menu_item_layout"
+                 android:layout_width="fill_parent"
+                 android:layout_height="@dimen/menu_item_height">
+        <ImageView android:layout_gravity="center_vertical"
+                   android:id="@id/iv_menu_item_leftpic"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="@dimen/menu_icon_marginleft"
+                   android:src="@drawable/ic_launcher"/>
+        <TextView android:textSize="@dimen/menu_text_size"
+                  android:text="@string/app_name"
+                  android:textColor="@color/explore_app_name"
+                  android:layout_gravity="center_vertical"
+                  android:id="@id/tv_menu_item_direction"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="@dimen/menu_text_marginleft"/>
+    </FrameLayout>
+
+    <LinearLayout android:id="@id/ll_menu_new"
+                  android:visibility="gone"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginRight="20.0dip"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true">
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_new"/>
+    </LinearLayout>
+</RelativeLayout>
