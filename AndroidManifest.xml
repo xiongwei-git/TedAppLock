@@ -26,7 +26,7 @@
                 android:theme="@style/NoTitleTranslucentTheme" />
 
         <activity
-                android:name="com.haibison.android.lockpattern.LockPatternActivity"
+                android:name=".activity.SplashPatternActivity"
                 android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
                 android:theme="@style/Alp.42447968.Theme.Light" />
         <activity android:name=".activity.MainActivity"

@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@id/iconview2"
+        android:id="@id/iv_pwd_logo_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

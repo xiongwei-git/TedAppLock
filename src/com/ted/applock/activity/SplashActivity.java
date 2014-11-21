@@ -25,7 +25,7 @@ public class SplashActivity extends TActivity{
         Intent intent = new Intent(this,ConfimPwdActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
 

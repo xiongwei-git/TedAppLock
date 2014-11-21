@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/rl_splash" android:background="@drawable/action_bar_background"
+                android:layout_width="fill_parent" android:layout_height="fill_parent"
+                xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+            android:id="@id/iv_pwd_more_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/btn_appbar_more"/>
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:id="@id/ll_pwd_guide_view"
+                  android:visibility="gone"
+                  android:layout_below="@id/iv_pwd_more_view"
+                  android:layout_alignRight="@id/iv_pwd_more_view"
+                  android:layout_height="wrap_content">
+        <include
+                layout="@layout/popwindow_guide"/>
+    </LinearLayout>
+
+
+    <ImageView
+            android:id="@id/iv_pwd_logo_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/logo"/>
+
+
+    <RelativeLayout
+            android:id="@id/lp_pwd_lock_pattern_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true">
+
+        <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                layout="@layout/alp_42447968_lock_pattern_view" />
+
+    </RelativeLayout>
+
+    <TextView android:id="@id/tv_pwd_tips"
+              style="@style/text_15_ffffff"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_above="@id/lp_pwd_lock_pattern_view"
+              android:layout_marginBottom="50dp"
+              android:text="首先绘制解说图案"
+              android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

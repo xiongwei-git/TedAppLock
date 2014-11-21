@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--pwd page-->
+    <item type="id" name="tv_pwd_tips">false</item>
+    <item type="id" name="ll_pwd_footer_layout">false</item>
+    <item type="id" name="bt_pwd_footer_cancel">false</item>
+    <item type="id" name="bt_pwd_footer_confirm">false</item>
+    <item type="id" name="lp_lock_pattern_view">false</item>
+    <item type="id" name="iv_pwd_more_view">false</item>
+    <item type="id" name="iv_pwd_logo_view">false</item>
+    <item type="id" name="ll_pwd_guide_view">false</item>
+    <item type="id" name="lp_pwd_lock_pattern_view">false</item>
+
+
     <!--SplashActivity-->
     <item type="id" name="rl_splash">false</item>
-    <item type="id" name="iconview2">false</item>
+
+    <item type="id" name="textView2">false</item>
 
     <!--MainActivity-->
     <item type="id" name="dl_main_layout_drawer_layout">false</item>
+    <item type="id" name="tv_popwindow">false</item>
     <!--Main menu-->
     <item type="id" name="rl_menu_item_layout">false</item>
     <item type="id" name="ll_menu_new">false</item>

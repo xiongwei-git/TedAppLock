@@ -19,7 +19,7 @@ public class ConfimPwdActivity extends TActivity {
     }
 
     private void createPattern(){
-        Intent intent = new Intent(LockPatternActivity.ACTION_CREATE_PATTERN, null,getApplicationContext(), LockPatternActivity.class);
+        Intent intent = new Intent(SplashPatternActivity.ACTION_CREATE_PATTERN, null,getApplicationContext(), SplashPatternActivity.class);
         startActivityForResult(intent, REQ_CREATE_PATTERN);
     }
 
@@ -28,8 +28,8 @@ public class ConfimPwdActivity extends TActivity {
         switch (requestCode) {
             case REQ_CREATE_PATTERN: {
                 if (resultCode == RESULT_OK) {
-                    char[] pattern = data.getCharArrayExtra(LockPatternActivity.EXTRA_PATTERN);
-                    LogUtil.e(pattern.toString());
+                    char[] pattern = data.getCharArrayExtra(SplashPatternActivity.EXTRA_PATTERN);
+                    //LogUtil.e(pattern.toString());
                     finish();
                 }else {
                     finish();

@@ -5,4 +5,7 @@
     <color name="menu_item_bg">#fff1f3f8</color>
     <color name="explore_app_name">#ff202020</color>
     <color name="action_bar_bg_color">#ff46bb6a</color>
+    <color name="dialog_button_normal">#ff4d4d4d</color>
+    <color name="dialog_button_press">#ff2196f3</color>
+    <color name="transparent_color">#00000000</color>
 </resources>

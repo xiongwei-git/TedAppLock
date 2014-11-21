@@ -11,4 +11,19 @@
     <string name="action_settings">设置</string>
     <string name="rate_us">为我们评分</string>
     <string name="about_us">关于</string>
+
+    <string name="use_pattern_unlock_type">使用图案解锁？</string>
+    <string name="use_pin_unlock_type">使用 PIN 码解锁？</string>
+    <string name="pattern_set_first">首先绘制解锁图案。</string>
+    <string name="pick_pattern">绘制图案以解锁屏幕</string>
+    <string name="lockpattern_recording_intro_header">绘制解锁图案。</string>
+    <string name="pattern_error_tip">应至少连接 %1$d 个点。请重试：</string>
+    <string name="pattern_release_finger">完成时松开手指。</string>
+    <string name="pattern_confirm">再次绘制图案以确认。</string>
+    <string name="pattern_error">抱歉，请重试：</string>
+    <string name="pattern_continue">图案已记录。</string>
+    <string name="continue_string">继续</string>
+
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
 </resources>
