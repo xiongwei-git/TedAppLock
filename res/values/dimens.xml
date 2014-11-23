@@ -4,4 +4,7 @@
     <dimen name="menu_icon_marginleft">16.0dip</dimen>
     <dimen name="menu_text_marginleft">72.0dip</dimen>
     <dimen name="menu_text_size">16.0sp</dimen>
+    <dimen name="lockpatternview_size">300dp</dimen>
+    <dimen name="lockpatternview_margin_bottom">35dp</dimen>
+    <dimen name="more_view_margin">5.0dip</dimen>
 </resources>

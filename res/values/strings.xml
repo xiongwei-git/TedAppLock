@@ -12,6 +12,7 @@
     <string name="rate_us">为我们评分</string>
     <string name="about_us">关于</string>
 
+    <string name="press_again">再次点击“返回”键以退出。</string>
     <string name="use_pattern_unlock_type">使用图案解锁？</string>
     <string name="use_pin_unlock_type">使用 PIN 码解锁？</string>
     <string name="pattern_set_first">首先绘制解锁图案。</string>

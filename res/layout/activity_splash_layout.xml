@@ -5,13 +5,20 @@
     android:layout_height="fill_parent"
     android:background="@drawable/action_bar_background" >
 
-
-    <ImageView
-        android:id="@id/iv_pwd_logo_view"
+    <TextView
+        android:id="@id/textView2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30.0dip"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:text="" />
+
+    <ImageView
+        android:id="@id/iconview2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textView2"
+        android:layout_alignParentLeft="true"
         android:src="@drawable/logo" />
 
 </RelativeLayout>
