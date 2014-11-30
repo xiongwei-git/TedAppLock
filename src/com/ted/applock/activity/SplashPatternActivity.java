@@ -30,10 +30,12 @@ import com.haibison.android.lockpattern.widget.LockPatternView;
 import com.haibison.android.lockpattern.widget.LockPatternView.Cell;
 import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 import com.ted.applock.R;
+import com.ted.applock.view.PwdRetreiveView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.zip.Inflater;
 
 import static com.haibison.android.lockpattern.util.Settings.Display.*;
 import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_AUTO_SAVE_PATTERN;
@@ -73,7 +75,7 @@ public class SplashPatternActivity extends Activity {
     private boolean bIsFirstCreate;
     private char[] mCurrentPattern;
     private TextView mTextInfo;
-    private RelativeLayout mMoreHelpView;
+    private PwdRetreiveView mMoreHelpView;
     private RelativeLayout mLogoView;
     private LockPatternView mLockPatternView;
 
@@ -102,12 +104,13 @@ public class SplashPatternActivity extends Activity {
 //            setTheme(getIntent().getIntExtra(EXTRA_THEME,com.haibison.android.lockpattern.R.style.Alp_42447968_Theme_Dark));
 //        }
         super.onCreate(savedInstanceState);
-        /**初始化视图*/
-        initContentView();
-        /**加载配置属性*/
-        loadSettings();
         /**获取当前密码状态*/
         loadSecurityStatus();
+        /**加载配置属性*/
+        loadSettings();
+        /**初始化视图*/
+        initContentView();
+
         if (mSEOption == SecurityOption.PATTERN) {
             updatePatternView();
         }else {
@@ -121,15 +124,6 @@ public class SplashPatternActivity extends Activity {
             mLockPatternView.setVisibility(View.VISIBLE);
             mMoreHelpView.setVisibility(View.VISIBLE);
         }
-    }
-
-
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        if (BuildConfig.DEBUG)
-            Log.d(CLASSNAME, "onConfigurationChanged()");
-        super.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -150,31 +144,6 @@ public class SplashPatternActivity extends Activity {
         }
 
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        /*
-         * Support canceling dialog on touching outside in APIs < 11.
-         *
-         * This piece of code is copied from android.view.Window. You can find
-         * it by searching for methods shouldCloseOnTouch() and isOutOfBounds().
-         */
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB
-                && event.getAction() == MotionEvent.ACTION_DOWN
-                && getWindow().peekDecorView() != null) {
-            final int x = (int) event.getX();
-            final int y = (int) event.getY();
-            final int slop = ViewConfiguration.get(this).getScaledWindowTouchSlop();
-            final View decorView = getWindow().getDecorView();
-            boolean isOutOfBounds = (x < -slop) || (y < -slop) || (x > (decorView.getWidth() + slop)) || (y > (decorView.getHeight() + slop));
-            if (isOutOfBounds) {
-                //finishWithNegativeResult(RESULT_CANCELED);
-                return true;
-            }
-        }
-
-        return super.onTouchEvent(event);
     }
 
     /**
@@ -229,17 +198,16 @@ public class SplashPatternActivity extends Activity {
     }
 
     private void initContentView() {
-        DisplayMode lastDisplayMode = mLockPatternView != null ? mLockPatternView.getDisplayMode() : null;
-        List<Cell> lastPattern = mLockPatternView != null ? mLockPatternView.getPattern() : null;
+
         /**设置视图*/
         setContentView(R.layout.splash_pattern_activity_layout);
-
-        UI.adjustDialogSizeForLargeScreens(getWindow());
 
         mTextInfo = (TextView) findViewById(R.id.tv_pwd_tips);
         mLockPatternView = (LockPatternView) findViewById(R.id.lp_pwd_lock_pattern_view);
         mLogoView = (RelativeLayout)findViewById(R.id.welcome_logo);
-        mMoreHelpView = (RelativeLayout)findViewById(R.id.rl_pwd_more_view);
+        mMoreHelpView = (PwdRetreiveView)findViewById(R.id.menu_view);
+        View mMoreView = this.getLayoutInflater().inflate(R.layout.popwindow_guide,null);
+        mMoreHelpView.initContentView(mMoreView);
 
         switch (getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) {
             case Configuration.SCREENLAYOUT_SIZE_LARGE:
@@ -263,9 +231,6 @@ public class SplashPatternActivity extends Activity {
         mLockPatternView.setTactileFeedbackEnabled(hapticFeedbackEnabled);
         mLockPatternView.setInStealthMode(mStealthMode);
         mLockPatternView.setOnPatternListener(mLockPatternViewListener);
-        if (lastPattern != null && lastDisplayMode != null && !mSEState.equals(SecurityState.VERIFY)){
-            mLockPatternView.setPattern(lastDisplayMode, lastPattern);
-        }
     }
 
     /**初始化*/

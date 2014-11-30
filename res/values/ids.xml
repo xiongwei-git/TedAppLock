@@ -10,6 +10,8 @@
     <item type="id" name="rl_pattrn_view">false</item>
     <item type="id" name="welcome_logo">false</item>
     <item type="id" name="pattrn_view">false</item>
+    <item type="id" name="splash_pwd_retrv_ic">false</item>
+    <item type="id" name="menu_view">false</item>
 
 
 

@@ -4,23 +4,10 @@
                 android:background="@drawable/action_bar_background"
                 android:layout_height="match_parent">
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:id="@id/rl_pwd_more_view"
-                    android:visibility="invisible"
-                    android:layout_height="56dp">
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/more_view_margin"
-                android:layout_marginTop="@dimen/more_view_margin"
-                android:background="@drawable/btn_appbar_more"/>
-    </RelativeLayout>
-
     <RelativeLayout android:id="@id/pattrn_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rl_pwd_more_view">
+                    android:layout_below="@id/menu_view">
 
     <RelativeLayout android:id="@id/welcome_logo"
                     android:layout_width="fill_parent"
@@ -69,23 +56,12 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout android:layout_width="wrap_content"
-                    android:visibility="gone"
-                    android:id="@id/rl_pwd_guide_view_bg"
-                    android:layout_below="@id/rl_pwd_more_view"
-                    android:layout_height="match_parent">
-
-        <LinearLayout
-                android:id="@id/ll_pwd_guide_view"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/more_view_margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            <include layout="@layout/popwindow_guide"/>
-        </LinearLayout>
-
-    </RelativeLayout>
-
+    <com.ted.applock.view.PwdRetreiveView
+            android:id="@id/menu_view"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/pwd_retreive_view_h"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:visibility="invisible" />
 
 </RelativeLayout>
