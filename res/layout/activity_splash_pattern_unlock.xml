@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/background_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/action_bar_background" >
+
+    <FrameLayout
+        android:id="@id/splash_back_layout"
+        android:layout_width="@dimen/abs__action_bar_default_height"
+        android:layout_height="@dimen/abs__action_bar_default_height"
+        android:background="@drawable/actionbar_item_bg_selector"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/btn_appbar_return" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@id/parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom|center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/guide_pattern_padding" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pattern_unlock_icon_margintop"
+            android:src="@drawable/logo" />
+
+        <com.haibison.android.lockpattern.widget.LockPatternView
+            android:id="@id/lockPattern"
+            android:layout_width="@dimen/pattern_size"
+            android:layout_height="@dimen/pattern_size"
+            android:layout_marginTop="@dimen/pattern_unlock_view_margintop" />
+    </LinearLayout>
+
+    <com.ted.applock.view.PwdRetreiveView
+        android:id="@id/splash_pwd_retrv_ic"
+        android:layout_width="50.0dip"
+        android:layout_height="50.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5.0dip"
+        android:layout_marginTop="5.0dip"
+        android:visibility="gone" />
+
+</RelativeLayout>

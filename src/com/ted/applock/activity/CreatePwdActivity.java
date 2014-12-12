@@ -1,28 +1,26 @@
 package com.ted.applock.activity;
 
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.*;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.android.TedFramework.util.DeviceUtil;
-import com.android.TedFramework.util.LogUtil;
 import com.android.TedFramework.util.ToastUtil;
-import com.haibison.android.lockpattern.BuildConfig;
-import com.haibison.android.lockpattern.util.*;
+import com.haibison.android.lockpattern.util.IEncrypter;
+import com.haibison.android.lockpattern.util.InvalidEncrypterException;
+import com.haibison.android.lockpattern.util.LoadingDialog;
+import com.haibison.android.lockpattern.util.Settings;
 import com.haibison.android.lockpattern.util.Settings.Display;
 import com.haibison.android.lockpattern.util.Settings.Security;
 import com.haibison.android.lockpattern.widget.LockPatternUtils;
@@ -30,22 +28,16 @@ import com.haibison.android.lockpattern.widget.LockPatternView;
 import com.haibison.android.lockpattern.widget.LockPatternView.Cell;
 import com.haibison.android.lockpattern.widget.LockPatternView.DisplayMode;
 import com.ted.applock.R;
+import com.ted.applock.base.TApplication;
 import com.ted.applock.view.PwdRetreiveView;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import static com.haibison.android.lockpattern.util.Settings.Display.*;
 import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_AUTO_SAVE_PATTERN;
 import static com.haibison.android.lockpattern.util.Settings.Security.METADATA_ENCRYPTER_CLASS;
 
-public class SplashPatternActivity extends Activity {
-
-    private static final String CLASSNAME = SplashPatternActivity.class.getName();
-    public static final int RESULT_FAILED = RESULT_FIRST_USER + 1;
-
+public class CreatePwdActivity extends Activity {
     /**通知做动画的消息*/
     private final int MSG_TO_DO_ANIMANATION = 0x001;
 
@@ -157,9 +149,12 @@ public class SplashPatternActivity extends Activity {
             e.printStackTrace();
         }
 
-        if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS))
+        if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS)){
             mMinWiredDots = Display.validateMinWiredDots(this,metaData.getInt(METADATA_MIN_WIRED_DOTS));
-        else mMinWiredDots = Display.getMinWiredDots(this);
+        }else {
+            mMinWiredDots = Display.getMinWiredDots(this);
+        }
+
 
         if (metaData != null && metaData.containsKey(METADATA_MAX_RETRIES))
             mMaxRetries = Display.validateMaxRetries(this,metaData.getInt(METADATA_MAX_RETRIES));
@@ -171,14 +166,17 @@ public class SplashPatternActivity extends Activity {
             mAutoSave = Security.isAutoSavePattern(this);
         }
 
-        if (metaData != null && metaData.containsKey(METADATA_CAPTCHA_WIRED_DOTS))
+        if (metaData != null && metaData.containsKey(METADATA_CAPTCHA_WIRED_DOTS)){
             mCaptchaWiredDots = Display.validateCaptchaWiredDots(this,metaData.getInt(METADATA_CAPTCHA_WIRED_DOTS));
-        else mCaptchaWiredDots = Display.getCaptchaWiredDots(this);
+        }else {
+            mCaptchaWiredDots = Display.getCaptchaWiredDots(this);
+        }
 
-        if (metaData != null && metaData.containsKey(METADATA_STEALTH_MODE))
+        if (metaData != null && metaData.containsKey(METADATA_STEALTH_MODE)){
             mStealthMode = metaData.getBoolean(METADATA_STEALTH_MODE);
-        else mStealthMode = Display.isStealthMode(this);
-
+        }else {
+            mStealthMode = Display.isStealthMode(this);
+        }
         /*
          * Encrypter.
          */
@@ -188,6 +186,7 @@ public class SplashPatternActivity extends Activity {
         }else{
             encrypterClass = Security.getEncrypterClass(this);
         }
+
         if (encrypterClass != null) {
             try {
                 mEncrypter = (IEncrypter) Class.forName(new String(encrypterClass), false, getClassLoader()).newInstance();
@@ -284,10 +283,10 @@ public class SplashPatternActivity extends Activity {
             protected Boolean doInBackground(Void... params) {
                 if (mSEState.equals(SecurityState.COMPARE)) {
                     char[] currentPattern = mCurrentPattern.clone();
-                    if (currentPattern == null)currentPattern = Security.getPattern(SplashPatternActivity.this);
+                    if (currentPattern == null)currentPattern = Security.getPattern(CreatePwdActivity.this);
                     if (currentPattern != null) {
                         if (mEncrypter != null) {
-                            return pattern.equals(mEncrypter.decrypt(SplashPatternActivity.this, currentPattern));
+                            return pattern.equals(mEncrypter.decrypt(CreatePwdActivity.this, currentPattern));
                         }else{
                             return Arrays.equals(currentPattern,LockPatternUtils.patternToSha1(pattern).toCharArray());
                         }
@@ -346,7 +345,7 @@ public class SplashPatternActivity extends Activity {
                 @Override
                 protected Boolean doInBackground(Void... params) {
                     if (mEncrypter != null){
-                        return pattern.equals(mEncrypter.decrypt(SplashPatternActivity.this, mCurrentPattern));
+                        return pattern.equals(mEncrypter.decrypt(CreatePwdActivity.this, mCurrentPattern));
                     }else
                         return Arrays.equals(mCurrentPattern,LockPatternUtils.patternToSha1(pattern).toCharArray());
                 }
@@ -370,7 +369,7 @@ public class SplashPatternActivity extends Activity {
 
                 @Override
                 protected char[] doInBackground(Void... params) {
-                    return mEncrypter != null ? mEncrypter.encrypt(SplashPatternActivity.this, pattern)
+                    return mEncrypter != null ? mEncrypter.encrypt(CreatePwdActivity.this, pattern)
                             : LockPatternUtils.patternToSha1(pattern).toCharArray();
                 }
 
@@ -392,7 +391,10 @@ public class SplashPatternActivity extends Activity {
      */
     private void createPatternOk(char[] pattern) {
         ToastUtil.show(getApplicationContext(),"已经成功创建了密码"+String.valueOf(pattern));
-        Settings.Security.setPattern(this,pattern);
+        Settings.Security.setPattern(this, pattern);
+        TApplication.getInstance().setHasPwd(true);
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -478,7 +480,7 @@ public class SplashPatternActivity extends Activity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Animation scaleAnimation = AnimationUtils.loadAnimation(SplashPatternActivity.this,R.anim.in_am);
+            Animation scaleAnimation = AnimationUtils.loadAnimation(CreatePwdActivity.this,R.anim.in_am);
             scaleAnimation.setAnimationListener(mPatternViewAnimationListener);
             mLockPatternView.startAnimation(scaleAnimation);
 
@@ -498,7 +500,7 @@ public class SplashPatternActivity extends Activity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Animation alphaAnimation = AnimationUtils.loadAnimation(SplashPatternActivity.this,R.anim.guide_first_step_title_anim);
+            Animation alphaAnimation = AnimationUtils.loadAnimation(CreatePwdActivity.this,R.anim.guide_first_step_title_anim);
             alphaAnimation.setAnimationListener(mTipsTitleAnimationListener);
             mTextInfo.startAnimation(alphaAnimation);
         }
@@ -517,7 +519,7 @@ public class SplashPatternActivity extends Activity {
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            Animation mMoreViewAnimation = AnimationUtils.loadAnimation(SplashPatternActivity.this,R.anim.icon_animation_top);
+            Animation mMoreViewAnimation = AnimationUtils.loadAnimation(CreatePwdActivity.this,R.anim.icon_animation_top);
             mMoreViewAnimation.setAnimationListener(mMoreViewAnimationListener);
             mMoreHelpView.startAnimation(mMoreViewAnimation);
         }
