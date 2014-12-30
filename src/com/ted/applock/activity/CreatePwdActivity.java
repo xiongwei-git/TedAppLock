@@ -92,9 +92,6 @@ public class CreatePwdActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         /**设置主题*/
-//        if (getIntent().hasExtra(EXTRA_THEME)){
-//            setTheme(getIntent().getIntExtra(EXTRA_THEME,com.haibison.android.lockpattern.R.style.Alp_42447968_Theme_Dark));
-//        }
         super.onCreate(savedInstanceState);
         /**获取当前密码状态*/
         loadSecurityStatus();
@@ -102,20 +99,11 @@ public class CreatePwdActivity extends Activity {
         loadSettings();
         /**初始化视图*/
         initContentView();
-
         if (mSEOption == SecurityOption.PATTERN) {
             updatePatternView();
-        }else {
-            updatePINView();
         }
         /**如果是创建密码状态，就做欢迎动画*/
-        if(mSEOption.equals(SecurityOption.PATTERN) && mSEState.equals(SecurityState.CREATE)){
-            mHandler.sendEmptyMessageDelayed(MSG_TO_DO_ANIMANATION,1500);
-        }else {
-            mTextInfo.setVisibility(View.VISIBLE);
-            mLockPatternView.setVisibility(View.VISIBLE);
-            mMoreHelpView.setVisibility(View.VISIBLE);
-        }
+        mHandler.sendEmptyMessageDelayed(MSG_TO_DO_ANIMANATION,1500);
     }
 
     @Override
@@ -142,50 +130,16 @@ public class CreatePwdActivity extends Activity {
      * Loads settings, either from manifest or {@link com.haibison.android.lockpattern.util.Settings}.
      */
     private void loadSettings() {
-        Bundle metaData = null;
-        try {
-            metaData = getPackageManager().getActivityInfo(getComponentName(),PackageManager.GET_META_DATA).metaData;
-        } catch (NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        if (metaData != null && metaData.containsKey(METADATA_MIN_WIRED_DOTS)){
-            mMinWiredDots = Display.validateMinWiredDots(this,metaData.getInt(METADATA_MIN_WIRED_DOTS));
-        }else {
-            mMinWiredDots = Display.getMinWiredDots(this);
-        }
-
-
-        if (metaData != null && metaData.containsKey(METADATA_MAX_RETRIES))
-            mMaxRetries = Display.validateMaxRetries(this,metaData.getInt(METADATA_MAX_RETRIES));
-        else mMaxRetries = Display.getMaxRetries(this);
-
-        if (metaData != null && metaData.containsKey(METADATA_AUTO_SAVE_PATTERN)) {
-            mAutoSave = metaData.getBoolean(METADATA_AUTO_SAVE_PATTERN);
-        }else {
-            mAutoSave = Security.isAutoSavePattern(this);
-        }
-
-        if (metaData != null && metaData.containsKey(METADATA_CAPTCHA_WIRED_DOTS)){
-            mCaptchaWiredDots = Display.validateCaptchaWiredDots(this,metaData.getInt(METADATA_CAPTCHA_WIRED_DOTS));
-        }else {
-            mCaptchaWiredDots = Display.getCaptchaWiredDots(this);
-        }
-
-        if (metaData != null && metaData.containsKey(METADATA_STEALTH_MODE)){
-            mStealthMode = metaData.getBoolean(METADATA_STEALTH_MODE);
-        }else {
-            mStealthMode = Display.isStealthMode(this);
-        }
-        /*
+        mMinWiredDots = Display.getMinWiredDots(this);
+        mMaxRetries = Display.getMaxRetries(this);
+        mAutoSave = Security.isAutoSavePattern(this);
+        mCaptchaWiredDots = Display.getCaptchaWiredDots(this);
+        mStealthMode = Display.isStealthMode(this);
+         /**
          * Encrypter.
          */
         char[] encrypterClass;
-        if (metaData != null && metaData.containsKey(METADATA_ENCRYPTER_CLASS)){
-            encrypterClass = metaData.getString(METADATA_ENCRYPTER_CLASS).toCharArray();
-        }else{
-            encrypterClass = Security.getEncrypterClass(this);
-        }
+        encrypterClass = Security.getEncrypterClass(this);
 
         if (encrypterClass != null) {
             try {
@@ -234,16 +188,9 @@ public class CreatePwdActivity extends Activity {
 
     /**初始化*/
     private void loadSecurityStatus(){
-        mCurrentPattern = Settings.Security.getPattern(this);
-        if(null == mCurrentPattern || mCurrentPattern.length == 0){
-            mSEOption = SecurityOption.PATTERN;
-            mSEState = SecurityState.CREATE;
-            bIsFirstCreate = true;
-        }else {
-            mSEOption = SecurityOption.PATTERN;
-            mSEState = SecurityState.COMPARE;
-            bIsFirstCreate = false;
-        }
+        mSEOption = SecurityOption.PATTERN;
+        mSEState = SecurityState.CREATE;
+        bIsFirstCreate = true;
     }
 
     /**执行动画*/
@@ -261,15 +208,7 @@ public class CreatePwdActivity extends Activity {
     private void updatePatternView(){
         if (mSEState.equals(SecurityState.CREATE)) {
             mTextInfo.setText(R.string.pattern_set_first);
-            RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)mLogoView.getLayoutParams();
-            //layoutParams.topMargin = DeviceUtil.getPixelFromDip(this,84f);
-            //mLogoView.setLayoutParams(layoutParams);
-            //mLogoView.setVisibility(View.VISIBLE);
-        }
-        else if (mSEState.equals(SecurityState.COMPARE)) {
-            mTextInfo.setText(R.string.pick_pattern);
-        }
-        else if (mSEState.equals(SecurityState.VERIFY)) {
+        }else if (mSEState.equals(SecurityState.VERIFY)) {
             mTextInfo.setText(R.string.pattern_confirm);
         }
     }
@@ -377,7 +316,7 @@ public class CreatePwdActivity extends Activity {
                 protected void onPostExecute(char[] result) {
                     super.onPostExecute(result);
                     mCurrentPattern = result.clone();
-                    mTextInfo.setText(R.string.pattern_continue);
+                    //mTextInfo.setText(R.string.pattern_continue);
                     mLockPatternView.postDelayed(mLockPatternViewReloader,DELAY_TIME_TO_RELOAD_LOCK_PATTERN_VIEW);
                 }
 
@@ -390,7 +329,7 @@ public class CreatePwdActivity extends Activity {
      * @param pattern
      */
     private void createPatternOk(char[] pattern) {
-        ToastUtil.show(getApplicationContext(),"已经成功创建了密码"+String.valueOf(pattern));
+        //ToastUtil.show(getApplicationContext(),"已经成功创建了密码"+String.valueOf(pattern));
         Settings.Security.setPattern(this, pattern);
         TApplication.getInstance().setHasPwd(true);
         Intent intent = new Intent(this,MainActivity.class);
@@ -411,10 +350,7 @@ public class CreatePwdActivity extends Activity {
             mLockPatternView.setDisplayMode(DisplayMode.Correct);
             if (mSEState.equals(SecurityState.CREATE)) {
                 mTextInfo.setText(R.string.pattern_release_finger);
-            }else if (mSEState.equals(SecurityState.COMPARE)) {
-                mTextInfo.setText(R.string.pick_pattern);
-            }
-            else if (mSEState.equals(SecurityState.VERIFY)) {
+            } else if (mSEState.equals(SecurityState.VERIFY)) {
                 mTextInfo.setText(R.string.pattern_confirm);
             }
         }
@@ -423,8 +359,6 @@ public class CreatePwdActivity extends Activity {
         public void onPatternDetected(List<Cell> pattern) {
             if (mSEState.equals(SecurityState.CREATE)) {
                 doCheckAndCreatePattern(pattern);
-            }else if (mSEState.equals(SecurityState.COMPARE)) {
-                doComparePattern(pattern);
             }else if (mSEState.equals(SecurityState.VERIFY)) {
                 if (!DisplayMode.Animate.equals(mLockPatternView.getDisplayMode())) {
                     doComparePattern(pattern);
@@ -444,13 +378,8 @@ public class CreatePwdActivity extends Activity {
                 }else {
                     mTextInfo.setText(R.string.lockpattern_recording_intro_header);
                 }
-            }else if (mSEState.equals(SecurityState.COMPARE)) {
-                mLockPatternView.setDisplayMode(DisplayMode.Correct);
-                mTextInfo.setText(R.string.pick_pattern);
             }else if (mSEState.equals(SecurityState.VERIFY)) {
                 mTextInfo.setText(R.string.pattern_confirm);
-//                List<Cell> pattern = getIntent().getParcelableArrayListExtra(EXTRA_PATTERN);
-//                mLockPatternView.setPattern(DisplayMode.Animate, pattern);
             }
         }
 

@@ -29,9 +29,9 @@ public class MenuItemView extends RelativeLayout {
         initView(context);
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Main_Menu_Item);
-            mTitltStr = a.getString(R.styleable.Main_Menu_Item_title);
+            mTitltStr = a.getString(R.styleable.Main_Menu_Item_titleStr);
             isHasIcon = a.getBoolean(R.styleable.Main_Menu_Item_hasIcon, true);
-            mIconId = a.getResourceId(R.styleable.Main_Menu_Item_icon, 0);
+            mIconId = a.getResourceId(R.styleable.Main_Menu_Item_iconId, 0);
             a.recycle();
         } else {
             isHasIcon = true;

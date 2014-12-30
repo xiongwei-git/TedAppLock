@@ -38,5 +38,4 @@ public class SplashActivity extends TActivity{
 
 
 
-
 }

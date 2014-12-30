@@ -16,7 +16,7 @@
     <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="TedWidget" />
+    <orderEntry type="module" module-name="appcompat_v7" />
     <orderEntry type="module" module-name="Lockpattern" />
   </component>
 </module>
-

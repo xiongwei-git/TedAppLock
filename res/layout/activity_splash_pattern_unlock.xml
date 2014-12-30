@@ -35,7 +35,7 @@
 
         <com.haibison.android.lockpattern.widget.LockPatternView
             android:id="@id/lockPattern"
-            android:layout_width="@dimen/pattern_size"
+            android:layout_width="@dimen/lockpatternview_size"
             android:layout_height="@dimen/pattern_size"
             android:layout_marginTop="@dimen/pattern_unlock_view_margintop" />
     </LinearLayout>
